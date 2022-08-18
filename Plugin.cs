@@ -1,3 +1,4 @@
+using System;
 using Exiled.API.Enums;
 using Exiled.API.Features;
 
@@ -9,12 +10,15 @@ namespace TorchPlayer
         internal EventHandler EventHandler = new EventHandler();
         public override PluginPriority Priority { get; } = PluginPriority.Last;
         public Plugin() => Instance = this;
-        public string PluginName => typeof(Plugin).Namespace;
+        public override string Name { get; } = typeof(Plugin).Namespace;
+        public override string Author { get; } = "Klarulor";
+        public override Version Version { get; } = new Version(1, 2, 0);
+        public override Version RequiredExiledVersion { get; } = new Version(5, 1, 0);
 
         public override void OnEnabled()
         {
             RegisterEvents();
-            Log.Info($"Plugin {PluginName} started");
+            Log.Info($"Plugin {Name} started");
         }
 
         public override void OnDisabled() => UnregisterEvents();
